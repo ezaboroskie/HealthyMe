@@ -7,7 +7,7 @@
 ## Preview Example
 
 
-## Link Example
+## Link to Website
 
 
 ## Programming Languages
