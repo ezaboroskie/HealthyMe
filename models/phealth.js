@@ -9,14 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
+    // static associate(models) {
+    //   models.usergoal.belongsTo(models.user, {as: 'user', foreignKey: 'phealthid'})
+    // }
   }
   phealth.init({
     goal: DataTypes.STRING,
     description: DataTypes.TEXT,
-    completed: DataTypes.BOOLEAN
+    completed: DataTypes.BOOLEAN,
+    phealthid: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'phealth',

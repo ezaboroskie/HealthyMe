@@ -7,6 +7,36 @@ const bcrypt = require('bcryptjs')
 const cors = require('cors')
 const session = require('express-session')
 const { Op } = require('sequelize') // Operator 
+const formidable = require('formidable')
+const {v4: uuidv4} = require('uuid')
+let uniqueFilename = ''
+require('dotenv').config()
+
+
+//Function to upload files
+function uploadFile(req,callback){
+    new formidable.IncomingForm().parse(req)
+    .on('fileBegin',(name,file)=>{
+
+        uniqueFilename = `${uuidv4()}.${file.name}`
+        file.name = uniqueFilename
+        file.path = __dirname + '/uploads/' + uniqueFilename
+        
+    })
+    .on('file',(name,file)=>{
+        callback(file.name)
+
+    })
+}
+
+
+
+app.use(session({
+    secret: 'SuperSecretPassword',
+    saveUninitialized: true
+}))
+
+app.use('/uploads',express.static('uploads'))
 
 app.use(express.urlencoded())
 app.engine('mustache', mustacheExpress())
@@ -28,8 +58,9 @@ app.get('/register', (req,res)=>{
     res.render('register')
 })
 
-app.get('/user-goals',(req,res)=>{
-    res.render('user-goals')
+app.get('/user',(req,res)=>{
+   res.render('user')
+   
 })
 
 app.get('/phealth', (req,res)=>{
@@ -39,6 +70,20 @@ app.get('/phealth', (req,res)=>{
 app.get('/mhealth',(req,res)=>{
     res.render('mhealth')
 })
+
+app.get('/user-goals',(req,res)=>{
+    res.render('user-goals')
+})
+
+//POST ROUTES
+app.post('/upload',(req,res)=>{
+
+    uploadFile(req,(photoURL)=>{
+        res.render('user')
+    })
+})
+
+
 
 
 app.listen(8080,() => {
