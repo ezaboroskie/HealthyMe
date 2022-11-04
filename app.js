@@ -9,7 +9,9 @@ app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
 
-
+app.get('/', (req, res) => {
+    res.render('index')
+})
 
 
 
