@@ -4,6 +4,7 @@ const app = express()
 const mustacheExpress = require('mustache-express')
 const models = require('./models')
 const bcrypt = require('bcryptjs')
+const cors = require('cors')
 const session = require('express-session')
 const { Op } = require('sequelize') // Operator 
 
