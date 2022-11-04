@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const mustacheExpress = require('mustache-express')
 const models = require('./models')
+const bcrypt = require('bcryptjs')
+const session = require('express-session')
 const { Op } = require('sequelize') // Operator 
 
 app.use(express.urlencoded())
