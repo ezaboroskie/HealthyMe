@@ -12,16 +12,26 @@ const {v4: uuidv4} = require('uuid')
 let uniqueFilename = ''
 require('dotenv').config()
 
+app.use('/uploads',express.static('uploads'))
+
+app.use(session({
+    secret: 'SuperSecretPassword',
+    saveUninitialized: true
+}))
+
+app.use(express.urlencoded())
+app.engine('mustache', mustacheExpress())
+app.set('views', './views')
+app.set('view engine', 'mustache')
 
 //Function to upload files
 function uploadFile(req,callback){
     new formidable.IncomingForm().parse(req)
     .on('fileBegin',(name,file)=>{
 
-        uniqueFilename = `${uuidv4()}.${file.name}`
+        uniqueFilename = `${uuidv4()}.${file.originalFilename.split('.').pop()}`;
         file.name = uniqueFilename
-        file.path = __dirname + '/uploads/' + uniqueFilename
-        
+        file.filepath = __dirname + '/uploads/' + uniqueFilename
     })
     .on('file',(name,file)=>{
         callback(file.name)
@@ -29,19 +39,6 @@ function uploadFile(req,callback){
     })
 }
 
-
-
-app.use(session({
-    secret: 'SuperSecretPassword',
-    saveUninitialized: true
-}))
-
-app.use('/uploads',express.static('uploads'))
-
-app.use(express.urlencoded())
-app.engine('mustache', mustacheExpress())
-app.set('views', './views')
-app.set('view engine', 'mustache')
 
 
 
@@ -52,10 +49,6 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res)=>{
     res.render('login')
-})
-
-app.get('/user', (req, res) => {
-    res.render('user')
 })
 
 app.get('/register', (req,res)=>{
@@ -83,6 +76,7 @@ app.get('/user-goals',(req,res)=>{
 app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
+        photoURL = `/uploads/${photoURL}`
         res.render('user')
     })
 })
