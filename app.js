@@ -78,8 +78,8 @@ app.get('/add-mhealth', (req,res)=>{
 
 app.get('/mhealth', async(req,res)=>{
     const mhealths = await models.mhealth.findAll({}) 
-    res.render('user-goals', {mhealths: mhealths})
-    console.log(mhealths)
+    res.render('mhealth', {mhealths: mhealths})
+    
 })
 
 app.get('/add-user-goal', (req,res)=>{
