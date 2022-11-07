@@ -77,6 +77,7 @@ app.get('/add-user-goal', (req,res)=>{
 app.get('/user-goals', async (req,res)=>{
     const userGoals = await models.usergoal.findAll({}) 
     res.render('user-goals', {userGoals: userGoals})
+    console.log(userGoals)
 })
 
 //POST ROUTES
@@ -107,6 +108,16 @@ app.post('/add-user-goal', async (req,res)=>{
     }
 })
 
+app.post('/delete-goal', async (req,res) =>{
+    const {goalId} = req.body
+    const deletedGoal = await models.usergoal.destroy({
+        where:{
+            id:parseInt(goalId)
+        }
+    })
+    res.render('user-goals')
+})
+// Leo is awesome
 
 
 app.listen(8080,() => {

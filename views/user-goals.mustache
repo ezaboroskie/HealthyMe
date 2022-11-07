@@ -4,8 +4,12 @@
 
 <ul>
 {{#userGoals}}
+<form method="POST" action="/delete-goal">
 <h2>{{goal}}</h2>
 <h3>{{description}}</h3>
+<button>Delete Goal</button>
+<input type="hidden" name="goalId" value={{id}} />
+</form>
 {{/userGoals}}
 </ul>
 
