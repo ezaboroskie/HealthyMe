@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     goal: DataTypes.STRING,
     description: DataTypes.TEXT,
     completed: DataTypes.BOOLEAN,
-    phealthid: DataTypes.INTEGER
+    phealthsid: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'phealth',

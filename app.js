@@ -62,8 +62,14 @@ app.get('/user', (req,res)=>{
    
 })
 
-app.get('/phealth', (req,res)=>{
-    res.render('phealth')
+app.get('/phealth', async (req,res)=>{
+    const physicalGoals = await models.phealth.findAll({})
+    res.render('phealth', {physicalGoals: physicalGoals})
+   
+})
+
+app.get('/add-physical-goal', (req,res)=>{
+    res.render('add-physical-goal')
 })
 
 app.get('/mhealth',(req,res)=>{
@@ -77,7 +83,7 @@ app.get('/add-user-goal', (req,res)=>{
 app.get('/user-goals', async (req,res)=>{
     const userGoals = await models.usergoal.findAll({}) 
     res.render('user-goals', {userGoals: userGoals})
-    console.log(userGoals)
+    
 })
 
 //POST ROUTES
@@ -108,6 +114,24 @@ app.post('/add-user-goal', async (req,res)=>{
     }
 })
 
+app.post('/add-physical-goal', async (req,res)=>{
+    const {goal, description, completed} = req.body
+
+    const physicalGoal = models.phealth.build({
+        goal: goal,
+        description: description,
+        completed: completed
+    })
+    
+    const savedPGoal = await physicalGoal.save()
+    if(savedPGoal){
+        const physicalGoals = await models.phealth.findAll({})
+        res.render('phealth', {physicalGoals: physicalGoals})
+    }else{
+        res.send('Not able to create new physical health goal')
+    }
+})
+
 app.post('/delete-user-goal', async (req,res) =>{
     const {goalId} = req.body
     const deletedGoal = await models.usergoal.destroy({
@@ -116,6 +140,16 @@ app.post('/delete-user-goal', async (req,res) =>{
         }
     })
     res.render('user-goals')
+})
+
+app.post('/delete-physical-goal', async (req,res)=>{
+    const {physicalId} = req.body
+    const deletedPGoal = await models.phealth.destroy({
+        where:{
+            id:parseInt(physicalId)
+        }
+    })
+    res.render('phealth')
 })
 // Leo is awesome
 
