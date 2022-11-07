@@ -6,9 +6,10 @@ const models = require('./models')
 const bcrypt = require('bcryptjs')
 const cors = require('cors')
 const session = require('express-session')
-const { Op } = require('sequelize') // Operator 
+const { Op, Model } = require('sequelize') // Operator 
 const formidable = require('formidable')
 const {v4: uuidv4} = require('uuid')
+const db = require('./models')
 let uniqueFilename = ''
 require('dotenv').config()
 
@@ -27,19 +28,7 @@ app.set('views', './views')
 app.set('view engine', 'mustache')
 
 //Function to upload files
-function uploadFile(req,callback){
-    new formidable.IncomingForm().parse(req)
-    .on('fileBegin',(name,file)=>{
 
-        uniqueFilename = `${uuidv4()}.${file.originalFilename.split('.').pop()}`;
-        file.name = uniqueFilename
-        file.filepath = __dirname + '/uploads/' + uniqueFilename
-    })
-    .on('file',(name,file)=>{
-        callback(file.name)
-
-    })
-}
 
 
 
@@ -57,8 +46,13 @@ app.get('/register', (req,res)=>{
     res.render('register')
 })
 
-app.get('/user', authentification, (req,res)=>{
-    res.render('user')
+app.get('/user', authentification, async (req,res)=>{
+    const userId = req.session.userId
+    const profilePic = await models.User.findOne({
+        where: {id: userId}
+    })
+    console.log(profilePic.profilepic)
+    res.render('user', {imageURL: profilePic.profilepic, className: 'profile-picture' })
    
 })
 
@@ -175,7 +169,7 @@ app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
         photoURL = `/uploads/${photoURL}`
-        res.render('user', {imageURL: photoURL, className: 'profile-picture' })
+        res.redirect('/user')
     })
 })
 
@@ -201,7 +195,8 @@ app.post('/add-physical-goal', async (req,res)=>{
     const physicalGoal = models.phealth.build({
         goal: goal,
         description: description,
-        completed: completed
+        completed: completed,
+        phealthsid: req.session.userId
     })
     
     const savedPGoal = await physicalGoal.save()
@@ -236,7 +231,8 @@ app.post('/add-mhealth', async (req,res)=>{
     const mentalGoal = models.mhealth.build({
         goal: goal,
         description: description,
-        completed: completed 
+        completed: completed,
+        mhealthsid: req.session.userId
     })
 
     const savedGoal = await mentalGoal.save()
@@ -253,6 +249,33 @@ app.post('/delete-mhealth', async (req,res) =>{
     })
     res.render('mhealth')
 })
+
+function uploadFile (req,callback){
+    new formidable.IncomingForm().parse(req)
+    .on('fileBegin', async (name,file)=>{
+
+        uniqueFilename = `${uuidv4()}.${file.originalFilename.split('.').pop()}`;
+        file.name = uniqueFilename
+        file.filepath = __dirname + '/uploads/' + uniqueFilename
+        
+        
+        
+        
+    })
+    .on('file',async (name,file)=>{
+        const userId = req.session.userId
+        const picture = "./uploads/" + uniqueFilename
+    
+        await models.User.update({
+            profilepic: picture
+        },{
+            where: {id:userId}
+        })
+        callback(file.name)
+
+    })
+}
+
 
 
 app.listen(8080,() => {
