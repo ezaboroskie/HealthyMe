@@ -17,6 +17,7 @@ app.use('/css', express.static('css'))
 
 app.use(session({
     secret: 'SuperSecretPassword',
+    resave: false,
     saveUninitialized: true
 }))
 
@@ -56,43 +57,115 @@ app.get('/register', (req,res)=>{
     res.render('register')
 })
 
-app.get('/user', (req,res)=>{
-    
+app.get('/user', authentification, (req,res)=>{
     res.render('user')
    
 })
 
-app.get('/phealth', async (req,res)=>{
+app.get('/phealth', authentification, async (req,res)=>{
+    const userId = req.session.userId
     const physicalGoals = await models.phealth.findAll({})
     res.render('phealth', {physicalGoals: physicalGoals})
    
 })
 
-app.get('/add-physical-goal', (req,res)=>{
-    res.render('add-physical-goal')
-})
-
-app.get('/add-mhealth', (req,res)=>{
-    res.render('add-mhealth')
-})
-
-app.get('/mhealth', async(req,res)=>{
+app.get('/mhealth',authentification,async(req,res)=>{
+    const userId = req.session.userId
     const mentalGoals = await models.mhealth.findAll({}) 
     res.render('mhealth', {mentalGoals: mentalGoals})
     
 })
 
-app.get('/add-user-goal', (req,res)=>{
-    res.render('add-user-goal')
-})
-
-app.get('/user-goals', async (req,res)=>{
+app.get('/user-goals',authentification, async (req,res)=>{
+    const userId = req.session.userId
     const userGoals = await models.usergoal.findAll({}) 
     res.render('user-goals', {userGoals: userGoals})
     
 })
 
+app.get('/add-physical-goal',authentification, (req,res)=>{
+    res.render('add-physical-goal')
+})
+
+app.get('/add-mhealth',authentification, (req,res)=>{
+    res.render('add-mhealth')
+})
+
+app.get('/add-user-goal',authentification, (req,res)=>{
+    res.render('add-user-goal')
+})
+
+
 //POST ROUTES
+
+app.post ('/register', async (req, res) =>{
+
+
+    const { username, password } = req.body
+    
+    let result_username = await models.User.findAll({
+        where: {
+            username:username
+        }
+    })
+
+   
+
+    if(result_username.length === 0 ) {
+
+        let salt = await bcrypt.genSalt(10)
+        let hashedPassword = await bcrypt.hash(password, salt)
+        
+        const user = await models.User.create({
+             username:username, password:hashedPassword
+        })
+        let user_upload = await user.save()
+        res.redirect('/login')
+    } else {
+        if(result_username.length >= 1 ) {
+            res.render('login', {errorMessage: 'username already exists. Try another.'})
+        } else if (result_username.length === 0) {
+            res.render('login', {errorMessage: 'email already exists. Try another'})
+        } else {res.render('login', {errorMessage: 'username already exist. Try again.'})}
+    }
+})
+
+app.post('/login', async (req, res) => {
+
+    const {username, password } = req.body
+
+    const user = await models.User.findOne({
+        where: {
+            username: username
+        }
+    })
+
+    if(user){
+        const result = await bcrypt.compare(password, user.password)
+        if(result) {
+            if(req.session) {
+                req.session.userId = user.id
+                req.session.username = user.username 
+            }
+            res.redirect('user')
+        } else {
+        res.render('login', {errorMessage: 'Invalid username or password'})
+    }}
+
+})
+
+function authentification(req,res,next){
+    if(req.session){
+        if(req.session.username){
+            next()
+        }else{
+            res.redirect('/login')
+        }
+    }else{
+        res.redirect('/login')
+    }
+}
+
 app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
@@ -186,6 +259,8 @@ app.post('/delete-mhealth', async (req,res) =>{
     })
     res.render('mhealth')
 })
+
+
 
 app.listen(8080,() => {
     console.log('Server is running healthy!')
