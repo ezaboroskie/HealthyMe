@@ -108,7 +108,7 @@ app.post('/add-user-goal', async (req,res)=>{
     }
 })
 
-app.post('/delete-goal', async (req,res) =>{
+app.post('/delete-user-goal', async (req,res) =>{
     const {goalId} = req.body
     const deletedGoal = await models.usergoal.destroy({
         where:{
