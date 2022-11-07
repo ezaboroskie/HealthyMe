@@ -77,8 +77,8 @@ app.get('/add-mhealth', (req,res)=>{
 })
 
 app.get('/mhealth', async(req,res)=>{
-    const mhealths = await models.mhealth.findAll({}) 
-    res.render('mhealth', {mhealths: mhealths})
+    const mentalGoals = await models.mhealth.findAll({}) 
+    res.render('mhealth', {mentalGoals: mentalGoals})
     
 })
 
@@ -162,16 +162,16 @@ app.post('/add-mhealth', async (req,res)=>{
     const {goal, description, completed} = req.body
     
 
-    const mhealth = models.mhealth.build({
+    const mentalGoal = models.mhealth.build({
         goal: goal,
         description: description,
         completed: completed 
     })
 
-    const savedGoal = await mhealth.save()
+    const savedGoal = await mentalGoal.save()
     if(savedGoal){
-        const mhealths = await models.mhealth.findAll({}) 
-        res.render('mhealth', {mhealths: mhealths})
+        const mentalGoals = await models.mhealth.findAll({}) 
+        res.render('mhealth', {mentalGoals: mentalGoals})
     }else{
         res.send('Not able to create new user goal')
     }
