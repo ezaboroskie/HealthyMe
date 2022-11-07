@@ -64,21 +64,27 @@ app.get('/user', authentification, (req,res)=>{
 
 app.get('/phealth', authentification, async (req,res)=>{
     const userId = req.session.userId
-    const physicalGoals = await models.phealth.findAll({})
+    const physicalGoals = await models.phealth.findAll({
+        where: {phealthsid: userId}
+    })
     res.render('phealth', {physicalGoals: physicalGoals})
    
 })
 
 app.get('/mhealth',authentification,async(req,res)=>{
     const userId = req.session.userId
-    const mentalGoals = await models.mhealth.findAll({}) 
+    const mentalGoals = await models.mhealth.findAll({
+        where: {mhealthsid: userId}
+    }) 
     res.render('mhealth', {mentalGoals: mentalGoals})
     
 })
 
 app.get('/user-goals',authentification, async (req,res)=>{
     const userId = req.session.userId
-    const userGoals = await models.usergoal.findAll({}) 
+    const userGoals = await models.usergoal.findAll({
+        where: {usergoalid: userId}
+    }) 
     res.render('user-goals', {userGoals: userGoals})
     
 })
@@ -96,8 +102,20 @@ app.get('/add-user-goal',authentification, (req,res)=>{
 })
 
 
-//POST ROUTES
 
+function authentification(req,res,next){
+    if(req.session){
+        if(req.session.username){
+            next()
+        }else{
+            res.redirect('/login')
+        }
+    }else{
+        res.redirect('/login')
+    }
+}
+
+//POST ROUTES
 app.post ('/register', async (req, res) =>{
 
 
@@ -108,8 +126,6 @@ app.post ('/register', async (req, res) =>{
             username:username
         }
     })
-
-   
 
     if(result_username.length === 0 ) {
 
@@ -154,17 +170,6 @@ app.post('/login', async (req, res) => {
 
 })
 
-function authentification(req,res,next){
-    if(req.session){
-        if(req.session.username){
-            next()
-        }else{
-            res.redirect('/login')
-        }
-    }else{
-        res.redirect('/login')
-    }
-}
 
 app.post('/upload',(req,res)=>{
 
@@ -181,16 +186,13 @@ app.post('/add-user-goal', async (req,res)=>{
     const userGoal = models.usergoal.build({
         goal: goal,
         description: description,
-        completed: completed 
+        completed: completed,
+        usergoalid: req.session.userId 
     })
 
     const savedGoal = await userGoal.save()
-    if(savedGoal){
-        const userGoals = await models.usergoal.findAll({}) 
-        res.render('user-goals', {userGoals: userGoals})
-    }else{
-        res.send('Not able to create new user goal')
-    }
+    res.redirect('/user-goals')
+   
 })
 
 app.post('/add-physical-goal', async (req,res)=>{
@@ -203,12 +205,8 @@ app.post('/add-physical-goal', async (req,res)=>{
     })
     
     const savedPGoal = await physicalGoal.save()
-    if(savedPGoal){
-        const physicalGoals = await models.phealth.findAll({})
-        res.render('phealth', {physicalGoals: physicalGoals})
-    }else{
-        res.send('Not able to create new physical health goal')
-    }
+    res.redirect('/phealth')
+   
 })
 
 app.post('/delete-user-goal', async (req,res) =>{
@@ -230,7 +228,7 @@ app.post('/delete-physical-goal', async (req,res)=>{
     })
     res.render('phealth')
 })
-// Leo is awesome
+
 app.post('/add-mhealth', async (req,res)=>{
     const {goal, description, completed} = req.body
     
@@ -242,12 +240,8 @@ app.post('/add-mhealth', async (req,res)=>{
     })
 
     const savedGoal = await mentalGoal.save()
-    if(savedGoal){
-        const mentalGoals = await models.mhealth.findAll({}) 
-        res.render('mhealth', {mentalGoals: mentalGoals})
-    }else{
-        res.send('Not able to create new user goal')
-    }
+    res.redirect('/mhealth')
+   
 })
 
 app.post('/delete-mhealth', async (req,res) =>{
@@ -261,7 +255,29 @@ app.post('/delete-mhealth', async (req,res) =>{
 })
 
 
-
 app.listen(8080,() => {
     console.log('Server is running healthy!')
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Dance Kirby! 
+
+//  <("<)   ^( " )^   (>")>
+
+// Wow Kirby... you're not a good dancer
+
+// t("t)
+
+//Fuck you Too Kirby
