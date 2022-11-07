@@ -72,8 +72,14 @@ app.get('/add-physical-goal', (req,res)=>{
     res.render('add-physical-goal')
 })
 
-app.get('/mhealth',(req,res)=>{
-    res.render('mhealth')
+app.get('/add-mhealth', (req,res)=>{
+    res.render('add-mhealth')
+})
+
+app.get('/mhealth', async(req,res)=>{
+    const mhealths = await models.mhealth.findAll({}) 
+    res.render('user-goals', {mhealths: mhealths})
+    console.log(mhealths)
 })
 
 app.get('/add-user-goal', (req,res)=>{
@@ -152,7 +158,34 @@ app.post('/delete-physical-goal', async (req,res)=>{
     res.render('phealth')
 })
 // Leo is awesome
+app.post('/add-mhealth', async (req,res)=>{
+    const {goal, description, completed} = req.body
+    
 
+    const mhealth = models.mhealth.build({
+        goal: goal,
+        description: description,
+        completed: completed 
+    })
+
+    const savedGoal = await mhealth.save()
+    if(savedGoal){
+        const mhealths = await models.mhealth.findAll({}) 
+        res.render('mhealth', {mhealths: mhealths})
+    }else{
+        res.send('Not able to create new user goal')
+    }
+})
+
+app.post('/delete-mhealth', async (req,res) =>{
+    const {goalId} = req.body
+    const deletedGoal = await models.mhealth.destroy({
+        where:{
+            id:parseInt(goalId)
+        }
+    })
+    res.render('mhealth')
+})
 
 app.listen(8080,() => {
     console.log('Server is running healthy!')
