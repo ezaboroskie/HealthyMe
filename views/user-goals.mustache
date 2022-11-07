@@ -1,1 +1,12 @@
 <h1> Overall Health and Wellness Goals Here </h1>
+
+<a href="/add-user-goal"><h2>Add a Long Term Goal</h2></a>
+
+<ul>
+{{#userGoals}}
+<h2>{{goal}}</h2>
+<h3>{{description}}</h3>
+{{/userGoals}}
+</ul>
+
+<a href="/user"><h3>User Profile</h3>

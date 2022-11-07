@@ -13,6 +13,7 @@ let uniqueFilename = ''
 require('dotenv').config()
 
 app.use('/uploads',express.static('uploads'))
+app.use('/css', express.static('css'))
 
 app.use(session({
     secret: 'SuperSecretPassword',
@@ -55,8 +56,9 @@ app.get('/register', (req,res)=>{
     res.render('register')
 })
 
-app.get('/user',(req,res)=>{
-   res.render('user')
+app.get('/user', (req,res)=>{
+    
+    res.render('user')
    
 })
 
@@ -68,8 +70,13 @@ app.get('/mhealth',(req,res)=>{
     res.render('mhealth')
 })
 
-app.get('/user-goals',(req,res)=>{
-    res.render('user-goals')
+app.get('/add-user-goal', (req,res)=>{
+    res.render('add-user-goal')
+})
+
+app.get('/user-goals', async (req,res)=>{
+    const userGoals = await models.usergoal.findAll({}) 
+    res.render('user-goals', {userGoals: userGoals})
 })
 
 //POST ROUTES
@@ -77,11 +84,28 @@ app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
         photoURL = `/uploads/${photoURL}`
-        res.render('user')
+        res.render('user', {imageURL: photoURL, className: 'profile-picture' })
     })
 })
 
+app.post('/add-user-goal', async (req,res)=>{
+    const {goal, description, completed} = req.body
+    
 
+    const userGoal = models.usergoal.build({
+        goal: goal,
+        description: description,
+        completed: completed 
+    })
+
+    const savedGoal = await userGoal.save()
+    if(savedGoal){
+        const userGoals = await models.usergoal.findAll({}) 
+        res.render('user-goals', {userGoals: userGoals})
+    }else{
+        res.send('Not able to create new user goal')
+    }
+})
 
 
 

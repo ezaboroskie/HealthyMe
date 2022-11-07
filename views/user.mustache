@@ -1,7 +1,12 @@
 <h1> Main User Interface To See Big Picture </h1>
 
 <form action="/upload" method="POST" enctype="multipart/form-data">
-    <label>Photo</label>
+    <label>Profile Picture</label>
     <input type="file" name="photo"/>
-    <button type="submit">Upload Photo</button>
-</form>    
+    <button type="submit">Upload Profile Picture</button>
+</form>
+
+<img src = "{{imageURL}}" class = "{{className}}" />
+
+<a href="/user-goals"><h2>Long Term Goals</h2>
+
