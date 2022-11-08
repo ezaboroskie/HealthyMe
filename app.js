@@ -136,6 +136,7 @@ app.post("/login", async (req, res) => {
         if(result) {
             if(req.session) {
                 req.session.username = user.username 
+                req.session.userId = user.id
             }
             res.redirect("/user")
         } else {
