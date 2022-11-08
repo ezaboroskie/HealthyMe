@@ -95,7 +95,10 @@ app.get('/add-user-goal',authentification, (req,res)=>{
     res.render('add-user-goal')
 })
 
-
+app.get('/logout', authentification, (req,res)=>{
+    req.session.destroy()
+    res.redirect('/login')
+})
 
 function authentification(req,res,next){
     if(req.session){
