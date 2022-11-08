@@ -12,6 +12,8 @@ const {v4: uuidv4} = require('uuid')
 let uniqueFilename = ''
 require('dotenv').config()
 
+app.use('/uploads', express.static ('uploads'))
+app.use('/css', express.static ('css'))
 
 app.use(session({
     secret: 'SuperSecretPassword',
