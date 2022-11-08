@@ -17,6 +17,7 @@ app.use('/css', express.static ('css'))
 
 app.use(session({
     secret: 'SuperSecretPassword',
+    resave: false,
     saveUninitialized: true
 }))
 
