@@ -41,6 +41,8 @@ function uploadFile(req,callback){
 
 
 
+
+
 // GET ROUTES
 app.get('/', (req, res) => {
     res.render('index')
@@ -78,6 +80,61 @@ app.get('/user-goals', async (req,res)=>{
 })
 
 //POST ROUTES
+app.post ('/register', async (req, res) =>{
+
+
+    const { username, password } = req.body
+    
+    let result_username = await models.User.findAll({
+        where: {
+            username:username
+        }
+    })
+
+    if(result_username.length === 0 ) {
+
+        let salt = await bcrypt.genSalt(10)
+        let hashedPassword = await bcrypt.hash(password, salt)
+        
+        const user = await models.User.create({
+             username:username, password:hashedPassword
+        })
+        let user_upload = await user.save()
+        res.redirect('/login')
+    } else {
+        if(result_username.length >= 1 ) {
+            res.render('login', {errorMessage: 'username already exists. Try another.'})
+        } else if (result_username.length === 0) {
+            res.render('login', {errorMessage: 'email already exists. Try another'})
+        } else {res.render('login', {errorMessage: 'username already exist. Try again.'})}
+    }
+})
+
+app.post('/login', async (req, res) => {
+
+    const {username, password } = req.body
+
+    const user = await models.User.findOne({
+        where: {
+            username: username
+        }
+    })
+
+    if(user){
+        const result = await bcrypt.compare(password, user.password)
+        if(result) {
+            if(req.session) {
+                req.session.userId = user.id
+                req.session.username = user.username 
+            }
+            res.redirect('user')
+        } else {
+        res.render('login', {errorMessage: 'Invalid username or password'})
+    }}
+
+})
+
+
 app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
