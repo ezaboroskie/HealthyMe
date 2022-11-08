@@ -46,11 +46,13 @@ app.get('/register', (req,res)=>{
 
 app.get('/user', authentification, async (req,res)=>{
     const userId = req.session.userId
-    const profilePic = await models.User.findOne({
+    const user = await models.User.findOne({
         where: {id: userId}
     })
-    console.log(profilePic.profilepic)
-    res.render('user', {imageURL: profilePic.profilepic, className: 'profile-picture' })
+    
+    
+    
+    res.render('user', {imageURL: user.profilepic, className: 'profile-picture', firstname: user.firstName, lastname: user.lastName })
    
 })
 
@@ -115,7 +117,7 @@ function authentification(req,res,next){
 
 //POST ROUTES
 app.post ("/register", async (req, res) => {
-    const {username, password} = req.body 
+    const {username, password, firstName, lastName} = req.body 
     let salt = await bcrypt.genSalt(10)
     let hashedPassword = await bcrypt.hash(password, salt)
     let user = await models.User.findOne({where: {username:username}})
@@ -124,7 +126,9 @@ app.post ("/register", async (req, res) => {
     } else {
     const newUser = models.User.build({
         username: username,
-        password: hashedPassword
+        password: hashedPassword,
+        firstName: firstName,
+        lastName: lastName, 
         })
     await newUser.save()
     res.redirect('/login')
@@ -149,7 +153,6 @@ app.post("/login", async (req, res) => {
         res.render("login", { errorMessage: "Enter correct username or password."})
     }
 })
-
 
 app.post('/upload',(req,res)=>{
 
