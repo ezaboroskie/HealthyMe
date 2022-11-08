@@ -24,26 +24,8 @@ app.set('views', './views')
 app.set('view engine', 'mustache')
 
 //Function to upload files
-function uploadFile(req,callback){
-    new formidable.IncomingForm().parse(req)
-    .on('fileBegin',(name,file)=>{
-
-        uniqueFilename = `${uuidv4()}.${file.originalFilename.split('.').pop()}`;
-        file.name = uniqueFilename
-        file.filepath = __dirname + '/uploads/' + uniqueFilename
-    })
-    .on('file',(name,file)=>{
-        callback(file.name)
-
-    })
-}
 
 
-
-
-
-
-// GET ROUTES
 app.get('/', (req, res) => {
     res.render('index')
 })
@@ -56,28 +38,74 @@ app.get('/register', (req,res)=>{
     res.render('register')
 })
 
-app.get('/user', (req,res)=>{
-    
-    res.render('user')
+app.get('/user', authentification, async (req,res)=>{
+    const userId = req.session.userId
+    const profilePic = await models.User.findOne({
+        where: {id: userId}
+    })
+    console.log(profilePic.profilepic)
+    res.render('user', {imageURL: profilePic.profilepic, className: 'profile-picture' })
    
 })
 
-app.get('/phealth', (req,res)=>{
-    res.render('phealth')
+app.get('/phealth', authentification, async (req,res)=>{
+    const userId = req.session.userId
+    const physicalGoals = await models.phealth.findAll({
+        where: {phealthsid: userId}
+    })
+    res.render('phealth', {physicalGoals: physicalGoals})
+   
 })
 
-app.get('/mhealth',(req,res)=>{
-    res.render('mhealth')
+app.get('/mhealth',authentification,async(req,res)=>{
+    const userId = req.session.userId
+    const mentalGoals = await models.mhealth.findAll({
+        where: {mhealthsid: userId}
+    }) 
+    res.render('mhealth', {mentalGoals: mentalGoals})
+    
 })
 
-app.get('/add-user-goal', (req,res)=>{
+app.get('/user-goals',authentification, async (req,res)=>{
+    const userId = req.session.userId
+    const userGoals = await models.usergoal.findAll({
+        where: {usergoalid: userId}
+    }) 
+    res.render('user-goals', {userGoals: userGoals})
+    
+})
+
+app.get('/add-physical-goal',authentification, (req,res)=>{
+    res.render('add-physical-goal')
+})
+
+app.get('/add-mhealth',authentification, (req,res)=>{
+    res.render('add-mhealth')
+})
+
+app.get('/add-user-goal',authentification, (req,res)=>{
     res.render('add-user-goal')
 })
 
-app.get('/user-goals', async (req,res)=>{
-    const userGoals = await models.usergoal.findAll({}) 
-    res.render('user-goals', {userGoals: userGoals})
+app.get('/logout', authentification, (req,res)=>{
+    req.session.destroy()
+    res.redirect('/login')
 })
+
+function authentification(req,res,next){
+    if(req.session){
+        if(req.session.username){
+            next()
+        }else{
+            res.redirect('/login')
+        }
+    }else{
+        res.redirect('/login')
+    }
+}
+
+
+
 
 //POST ROUTES
 app.post ('/register', async (req, res) =>{
@@ -139,7 +167,7 @@ app.post('/upload',(req,res)=>{
 
     uploadFile(req,(photoURL)=>{
         photoURL = `/uploads/${photoURL}`
-        res.render('user', {imageURL: photoURL, className: 'profile-picture' })
+        res.redirect('/user')
     })
 })
 
@@ -150,17 +178,102 @@ app.post('/add-user-goal', async (req,res)=>{
     const userGoal = models.usergoal.build({
         goal: goal,
         description: description,
-        completed: completed 
+        completed: completed,
+        usergoalid: req.session.userId 
     })
 
     const savedGoal = await userGoal.save()
-    if(savedGoal){
-        const userGoals = await models.usergoal.findAll({}) 
-        res.render('user-goals', {userGoals: userGoals})
-    }else{
-        res.send('Not able to create new user goal')
-    }
+    res.redirect('/user-goals')
+   
 })
+
+app.post('/add-physical-goal', async (req,res)=>{
+    const {goal, description, completed} = req.body
+
+    const physicalGoal = models.phealth.build({
+        goal: goal,
+        description: description,
+        completed: completed,
+        phealthsid: req.session.userId
+    })
+    
+    const savedPGoal = await physicalGoal.save()
+    res.redirect('/phealth')
+   
+})
+
+app.post('/delete-user-goal', async (req,res) =>{
+    const {goalId} = req.body
+    const deletedGoal = await models.usergoal.destroy({
+        where:{
+            id:parseInt(goalId)
+        }
+    })
+    res.render('user-goals')
+})
+
+app.post('/delete-physical-goal', async (req,res)=>{
+    const {physicalId} = req.body
+    const deletedPGoal = await models.phealth.destroy({
+        where:{
+            id:parseInt(physicalId)
+        }
+    })
+    res.render('phealth')
+})
+
+app.post('/add-mhealth', async (req,res)=>{
+    const {goal, description, completed} = req.body
+    
+
+    const mentalGoal = models.mhealth.build({
+        goal: goal,
+        description: description,
+        completed: completed,
+        mhealthsid: req.session.userId
+    })
+
+    const savedGoal = await mentalGoal.save()
+    res.redirect('/mhealth')
+   
+})
+
+app.post('/delete-mhealth', async (req,res) =>{
+    const {goalId} = req.body
+    const deletedGoal = await models.mhealth.destroy({
+        where:{
+            id:parseInt(goalId)
+        }
+    })
+    res.render('mhealth')
+})
+
+function uploadFile (req,callback){
+    new formidable.IncomingForm().parse(req)
+    .on('fileBegin', async (name,file)=>{
+
+        uniqueFilename = `${uuidv4()}.${file.originalFilename.split('.').pop()}`;
+        file.name = uniqueFilename
+        file.filepath = __dirname + '/uploads/' + uniqueFilename
+        
+        
+        
+        
+    })
+    .on('file',async (name,file)=>{
+        const userId = req.session.userId
+        const picture = "./uploads/" + uniqueFilename
+    
+        await models.User.update({
+            profilepic: picture
+        },{
+            where: {id:userId}
+        })
+        callback(file.name)
+
+    })
+}
+
 
 
 
