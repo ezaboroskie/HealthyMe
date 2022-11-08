@@ -9,11 +9,17 @@
 <body>
     <h1> Registration Page </h1>
     <form method="POST" action="/register">
-        <label>Username</label>
+        <label>Username:</label>
         <input required minlength="1" type="text" placeholder="Enter username" name="username" />
         <br>
-        <label>Password</label>
+        <label>Password:</label>
         <input required minlength="6" maxlength="12" type="password" placeholder="Enter password" name="password" />
+        <br>
+        <label>First Name:</label>
+        <input required type="text" placeholder="Enter first name" name="firstName" />
+        <br>
+        <label>Last Name:</label>
+        <input required type="text" placeholder="Enter last name" name="lastName" />
         <br>
         <button>Register</button>
     </form>
