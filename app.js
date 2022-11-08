@@ -16,8 +16,11 @@ app.use('/uploads', express.static ('uploads'))
 app.use('/css', express.static ('css'))
 
 app.use(session({
-    secret: 'SuperSecretPassword',
+
+    secret: process.env.SESSION_SECRET_KEY,
+   
     resave: false,
+
     saveUninitialized: true
 }))
 
