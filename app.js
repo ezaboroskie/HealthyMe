@@ -110,58 +110,39 @@ function authentification(req,res,next){
 
 
 //POST ROUTES
-app.post ('/register', async (req, res) =>{
-
-
-    const { username, password } = req.body
-    
-    let result_username = await models.User.findAll({
-        where: {
-            username:username
-        }
-    })
-
-    if(result_username.length === 0 ) {
-
-        let salt = await bcrypt.genSalt(10)
-        let hashedPassword = await bcrypt.hash(password, salt)
-        
-        const user = await models.User.create({
-             username:username, password:hashedPassword
-        })
-        let user_upload = await user.save()
-        res.redirect('/login')
+app.post ("/register", async (req, res) => {
+    const {username, password} = req.body 
+    let salt = await bcrypt.genSalt(10)
+    let hashedPassword = await bcrypt.hash(password, salt)
+    let user = await models.User.findOne({where: {username:username}})
+    if(user) {
+    res.render("register", { errorMessage: 'Username is already taken'})
     } else {
-        if(result_username.length >= 1 ) {
-            res.render('login', {errorMessage: 'username already exists. Try another.'})
-        } else if (result_username.length === 0) {
-            res.render('login', {errorMessage: 'email already exists. Try another'})
-        } else {res.render('login', {errorMessage: 'username already exist. Try again.'})}
+    const newUser = models.User.build({
+        username: username,
+        password: hashedPassword
+        })
+    await newUser.save()
+    res.redirect('/login')
     }
 })
 
-app.post('/login', async (req, res) => {
-
-    const {username, password } = req.body
-
-    const user = await models.User.findOne({
-        where: {
-            username: username
-        }
-    })
-
-    if(user){
+app.post("/login", async (req, res) => {
+    const {username, password} = req.body 
+    let user = await models.User.findOne({where: {username:username}})
+    if(user) {
         const result = await bcrypt.compare(password, user.password)
         if(result) {
             if(req.session) {
-                req.session.userId = user.id
                 req.session.username = user.username 
             }
-            res.redirect('user')
+            res.redirect("/user")
         } else {
-        res.render('login', {errorMessage: 'Invalid username or password'})
-    }}
-
+            res.render("login", { errorMessage: "Invalid username"})
+        }
+    } else {
+        res.render("login", { errorMessage: "Enter correct username or password."})
+    }
 })
 
 
