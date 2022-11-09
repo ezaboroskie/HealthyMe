@@ -9,22 +9,20 @@
 </head>
 <body>
     <div>
-        <h1> Login Page </h1>
+        <h1> Login </h1>
         <form method="POST" action="/login">
-            <label>Username</label>
-            <input type="text" placeholder="Enter username" name="username" />
+            <input class="regy-card-f" type="text" placeholder="Enter username" name="username" />
             <br>
-            <label>Password</label>
-            <input type="password" placeholder="Enter password" name="password" />
+            <input class="regy-card-f" type="password" placeholder="Enter password" name="password" />
             <br>
             <button id="login-button">Login</button>
         </form>
         {{errorMessage}}
     </div>
 
-    <p>Don't have an account? 
-        <a class="links" href="/register">Click Here</a>
-    </p>
+     
+        <a class="links" href="/register">Don't Have an account? Click Here!</a>
+
     
 </body>
 </html>

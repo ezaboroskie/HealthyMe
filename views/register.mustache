@@ -7,27 +7,27 @@
     <link rel="stylesheet" href="/css/styles.css">
     <title>Registration</title>
 </head>
-<body>
+<body id="regy-body">
     <h1> Registration Page </h1>
-    <form method="POST" action="/register">
-        <label>Username:</label>
-        <input required minlength="1" type="text" placeholder="Enter username" name="username" />
+    <form class="regy-card" method="POST" action="/register">
+        <label class="regy-l"></label>
+        <input class="regy-card-f"  required minlength="1" type="text" placeholder="Enter username" name="username" />
         <br>
-        <label>Password:</label>
-        <input required minlength="6" maxlength="12" type="password" placeholder="Enter password" name="password" />
+        <label class="regy-l"></label>
+        <input class="regy-card-f"  required minlength="6" maxlength="12" type="password" placeholder="Enter password" name="password" />
         <br>
-        <label>First Name:</label>
-        <input required type="text" placeholder="Enter first name" name="firstName" />
+        <label class="regy-l"></label>
+        <input class="regy-card-f"  required type="text" placeholder="Enter first name" name="firstName" />
         <br>
-        <label>Last Name:</label>
-        <input required type="text" placeholder="Enter last name" name="lastName" />
+        <label class="regy-"></label>
+        <input class="regy-card-f" required type="text" placeholder="Enter last name" name="lastName" />
         <br>
-        <button>Register</button>
+        <button id="regi-button">Register</button>
     </form>
     {{errorMessage}}
     <div id="reg-login-link">
         <p>Already have an account? 
-            <a href="/login">Click Here</a>
+            <a id="ahc-link" href="/login">Click Here</a>
         </p>
     </div>
 
