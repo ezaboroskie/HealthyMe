@@ -112,6 +112,10 @@ function authentification(req,res,next){
     }
 }
 
+app.get('/useful-links', authentification, (req, res) => {
+    res.render('useful-links')
+})
+
 
 
 

@@ -52,6 +52,7 @@ body {
     background-color: #7D8F69;
 }
 
+
 #index-links {
     position: absolute;
     top: 0%;
@@ -115,3 +116,29 @@ body {
     align-items: center;
     text-align: center;
 }
+
+/* useful links styles */
+
+.animate__animated {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.linkimg {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
+.usefulimg {
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+  }
+
+figcaption {
+    display: flex;
+    justify-content: center;
+    margin: 10px
+  }
