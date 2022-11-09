@@ -1,18 +1,29 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
 <h1> Physical Wellbeing Goals and Comments</h1>
 
 
 <a href="/add-physical-goal"><h2>Add a Physical Wellbeing Goal</h2></a>
+    <div>
+      <ul>
+      {{#physicalGoals}}
+      <form method="POST" action="/delete-physical-goal">
+      <h2>{{goal}}</h2>
+      <h3>{{description}}</h3>
+      <button>Delete Goal</button>
+      <input type="hidden" name="physicalId" value={{id}} />
+      </form>
+      {{/physicalGoals}}
+      </ul>
+    </div>
+    <div id="phealth-links">
+      <a href="/add-physical-goal"><h2>Add a Physical Wellbeing Goal</h2></a>
+      <a href="/user"><h3>User Profile</h3></a>
+      <a href= "/logout"><p>Logout</p></a>
+    </div>
 
-<ul>
-{{#physicalGoals}}
-<form method="POST" action="/delete-physical-goal">
-<h2>{{goal}}</h2>
-<h3>{{description}}</h3>
-<button>Delete Goal</button>
-<input type="hidden" name="physicalId" value={{id}} />
-</form>
-{{/physicalGoals}}
-</ul>
-
-<a href="/user"><h3>User Profile</h3></a>
-<a href= "/logout"><p>Logout</p></a>
+    </body>
+</html>

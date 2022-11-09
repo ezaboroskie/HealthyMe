@@ -6,25 +6,26 @@
 
 
 <body>
-
-<h1> Main User Interface To See Big Picture </h1>
-
-
-<h3>Welcome, {{firstname}} {{lastname}}</h3>
-
-<form action="/upload" method="POST" enctype="multipart/form-data">
-    <label>Profile Picture</label>
-    <input type="file" name="photo"/>
-    <button type="submit">Upload Profile Picture</button>
-</form>
+<div>
+    <h1> Main User Interface To See Big Picture </h1>
+    <h3>Welcome, {{firstname}} {{lastname}}</h3>
+</div>
+<div>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label>Profile Picture</label>
+        <input type="file" name="photo"/>
+        <button type="submit">Upload Profile Picture</button>
+    </form>
+</div>
 
 <img src ="{{imageURL}}" class = "{{className}}" />
+<div id="user-links">
+    <a href="/user-goals"><h2>Long Term Goals</h2></a>
+    <a href="/phealth"><h2>Physical Goals</h2></a>
+    <a href="/mhealth"><h2>Mental Health Goals</h2></a>
+    <a href= "/logout"><p>Logout</p></a>
+</div>
 
-<a href="/user-goals"><h2>Long Term Goals</h2></a>
-<a href="/phealth"><h2>Physical Goals</h2></a>
-<a href="/mhealth"><h2>Mental Health Goals</h2></a>
-
-<a href= "/logout"><p>Logout</p></a>
 
     
 </body>

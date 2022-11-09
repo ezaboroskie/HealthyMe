@@ -1,19 +1,28 @@
-<h1> Overall Health and Wellness Goals Here </h1>
-
-<a href="/add-user-goal"><h2>Add a Long Term Goal</h2></a>
-
-<ul>
-{{#userGoals}}
-<form method="POST" action="/delete-user-goal">
-<h2>{{goal}}</h2>
-<h3>{{description}}</h3>
-<button>Delete Goal</button>
-<input type="hidden" name="goalId" value={{id}} />
-</form>
-{{/userGoals}}
-</ul>
-
-<a href="/user"><h3>User Profile</h3></a>
-
-<a href= "/logout"><p>Logout</p></a>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div>
+      <h1> Overall Health and Wellness Goals Here </h1>
+    </div>
+    <div>
+      <ul>
+        {{#userGoals}}
+        <form method="POST" action="/delete-user-goal">
+        <h2>{{goal}}</h2>
+        <h3>{{description}}</h3>
+        <button>Delete Goal</button>
+        <input type="hidden" name="goalId" value={{id}} />
+        </form>
+        {{/userGoals}}
+      </ul>
+    </div>
+    <div id="user-goal-links">
+      <a href="/add-user-goal"><h2>Add a Long Term Goal</h2></a>
+      <a href="/user"><h3>User Profile</h3></a>
+      <a href= "/logout"><p>Logout</p></a>
+    </div>
+    </body>
+</html>
 
