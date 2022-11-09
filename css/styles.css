@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@300&family=Roboto+Mono:wght@500&family=Russo+One&display=swap');
+
 body {
-    background-color: #F7F7F7;
-    color: #9F8772;
+    background: linear-gradient(120deg, #73A9AD, #7D8F69);
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    align-items: center;
+    text-align: center;
 }
 
 .profile-picture {
@@ -14,8 +19,13 @@ body {
 }
 
 #login-button {
-    color: black;
-    background-color: #7D8F69;
+    border: none;
+    outline: none;
+    margin: 5px;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, .3);
+    border-radius: 100px;
+    width: 25%;
 }
 
 #top {
@@ -27,10 +37,11 @@ body {
 }
 
 .links {
-    text-align: right;
-    position: absolute;
     top: 0%;
     right: 5%;
+    color: black;
+    text-decoration: none;
+
 }
 #login-link {
     color: #7D8F69 ;
@@ -39,6 +50,71 @@ body {
 #mhealth-button {
     color: #9F8772;
     background-color: #7D8F69;
+}
+
+
+#index-links {
+    position: absolute;
+    top: 0%;
+    right: 5%;
+    color: black;
+}
+
+#login-button {
+    color: black;
+    text-decoration: none;
+}
+
+#ahc-link {
+    text-decoration: none;
+    color: black;
+
+}
+
+#regi-button {
+    border: none;
+    outline: none;
+    margin: 5px;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, .3);
+    border-radius: 100px;
+    width: 25%;
+    
+}
+
+.regy-card {
+    display: block;
+    align-items: center;
+    color: black;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+#regy-body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #73A9AD, #7D8F69);
+    height: 100vh;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    padding: 1rem, 1.5rem;
+    width: 100%;
+}
+
+.regy-card-f {
+    border: none;
+    outline: none;
+    margin: 5px;
+    background: rgba(255, 255, 255, .3);
+    padding: 1rem 1.5rem;
+    border-radius: 100px;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 /* useful links styles */
@@ -66,6 +142,7 @@ figcaption {
     justify-content: center;
     margin: 10px
   }
+
 
 .coverimg {
     height: 85%;
