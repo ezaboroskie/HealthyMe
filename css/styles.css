@@ -158,3 +158,18 @@ figcaption {
     justify-content: center;
     font-weight: bold;
     }
+
+#user-links {
+    align-items: center;
+    text-align: center;
+    outline-offset: 1px;
+    outline-width: 5px;
+}
+
+
+.user-page-links {
+    align-items: center;
+    text-align: center;
+    display: block;
+    justify-content: left;
+}
