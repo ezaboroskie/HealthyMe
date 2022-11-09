@@ -15,7 +15,7 @@
 * JavaScript, Node.js, Express.js, PostgreSQL, CSS, 
 
 ## Team Members
-* Elyas Ozbek
-* Nova Merida
-* Matt Herringshaw
-* Eddie Zaboroskie
+* @ElyasO03
+* @NovaMerida
+* @MattHerringshaw1
+* @ezaboroskie
