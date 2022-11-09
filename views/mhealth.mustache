@@ -1,17 +1,26 @@
-<h1> Mental Wellbeing Goals and Comments </h1>
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
 
-<a href="/add-mhealth"><h2>Add a Mental Health Goal</h2></a>
-
-<ul>
-{{#mentalGoals}}
-<form method="POST" action="/delete-mhealth">
-<h2>{{goal}}</h2>
-<h3>{{description}}</h3>
-<button>Delete Goal</button>
-<input type="hidden" name="goalId" value={{id}} />
-</form>
-{{/mentalGoals}}
-</ul>
-
-<a href="/user"><h3>User Profile</h3></a>
-<a href= "/logout"><p>Logout</p></a>
+  <body>
+    <h1> Mental Wellbeing Goals and Comments </h1>
+    <div>
+      <ul>
+        {{#mentalGoals}}
+        <form method="POST" action="/delete-mhealth">
+        <h2>{{goal}}</h2>
+        <h3>{{description}}</h3>
+        <button>Delete Goal</button>
+        <input type="hidden" name="goalId" value={{id}} />
+        </form>
+        {{/mentalGoals}}
+      </ul>
+    </div>
+    <div id="mhealth-links">
+      <a href="/add-mhealth"><h2>Add a Mental Health Goal</h2></a>
+      <a href="/user"><h3>User Profile</h3></a>
+      <a href= "/logout"><p>Logout</p></a>
+    </div>
+  </body>
+</html>

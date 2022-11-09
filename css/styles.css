@@ -1,5 +1,42 @@
+body {
+    background-color: #F7F7F7;
+    color: #9F8772;
+}
+
 .profile-picture {
     height: 150px;
     width: auto;
     border-radius: 25px;
+}
+
+.login-create {
+    text-align: right;
+}
+
+#login-button {
+    color: black;
+    background-color: #7D8F69;
+}
+
+#top {
+    text-align: center;
+}
+
+#index-title {
+    text-align: center;   
+}
+
+.links {
+    text-align: right;
+    position: absolute;
+    top: 0%;
+    right: 5%;
+}
+#login-link {
+    color: #7D8F69 ;
+}
+
+#mhealth-button {
+    color: #9F8772;
+    background-color: #7D8F69;
 }
