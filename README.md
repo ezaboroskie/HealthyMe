@@ -7,6 +7,8 @@
 ## Preview Example
 
 ## Guest Login
+* username: test3
+* password: test3
 
 ## Link to Website
 
