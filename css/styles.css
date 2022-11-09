@@ -66,3 +66,18 @@ figcaption {
     justify-content: center;
     margin: 10px
   }
+
+.coverimg {
+    height: 85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    margin-bottom: 2%;
+    }
+
+.indextitle {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    }
