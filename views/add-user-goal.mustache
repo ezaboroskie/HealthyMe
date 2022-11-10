@@ -10,8 +10,12 @@
         <div class="add-user-form">
             <form method = "POST" action = "/add-user-goal">
                 <h3> Details of Your Goal </h3>
-                <input type = "text" placeHolder = "Name your goal" name= "goal" />
-                <input type = "text" placeHolder = "Describe your goal" name = "description" />
+                <div class = 'goal-name'>
+                <textarea class='goal-name-box' type = "text" placeHolder = "Name your goal" name= "goal" ></textarea>
+                </div>
+                <div class ='goal-detail'>
+                <textarea class='goal-detail-box' type = "text" placeHolder = "Describe your goal" name = "description" ></textarea>
+                </div>
                 <button class="btn">Add Goal</button>
             </form>
         </div>
