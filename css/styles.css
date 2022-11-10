@@ -10,13 +10,11 @@ body {
 }
 
 .profile-picture {
-    height: 50px;
-    width: 50px;
+    height: 150px;
+    width: 150px;
     margin: 0px;
     border-radius: 50%;
-    position: absolute;
-    top: 3.7%;
-    right: 5%;
+    align-self: center;
 }
 
 .login-create {
@@ -68,32 +66,42 @@ body {
 }
 
 .page-header {
-    background-color: #D3D3D3;
     color: #9a3400;
     font-size: 20px;
     font-weight: 700;
     background: #73A9AD;
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    
-    
+    flex-direction: column;
+    margin-bottom: 20px;
+    justify-content: center;
+    padding-bottom: 10px;
 }
+
+.user-header {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.user-header2 {
+    margin-top: 5px;
+    margin-bottom:5px;
+}
+.text-container{
+   
+
+}
+.button-container{
+
+
+
+}
+
 
 .header-text {
     margin: 2px;
     
 }
-.text-container{
-   align-self: center;
-}
-.button-container{
-   align-self: right;
-   justify-self: right;
-   align-content: right;
 
-}
 .btn-login {
     
     font-family: "Roboto" sans-serif;
@@ -113,6 +121,7 @@ body {
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
+    margin-right: 4px;
 }
 
 .btn-regy{
@@ -134,6 +143,7 @@ body {
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
+    margin-left: 4px;
 }
 
 #login-button {
@@ -321,6 +331,29 @@ figcaption {
     transition-property: box-shadow, transform;
 }
 
+.btn-logout {
+    position: absolute;
+    bottom: 2%;
+    left: 87%;
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #9a3400;
+    width: 10%;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
 .btn-view {
     font-family: "Roboto" sans-serif;
     font-size: 10px;
@@ -446,7 +479,7 @@ input[type="file"]::file-selector-button {
 }
 
 .coverimg {
-    height: 85%;
+    height: 75%;
     width: auto;
     border-radius: 5px;
     }
@@ -506,7 +539,8 @@ input[type="file"]::file-selector-button {
     width: 30%;
     margin:auto;
     border-radius: 15px;
-    padding:1%
+    padding:1%;
+    margin-top: 50px;
     
 }
 /* @media (max-width:749px){
