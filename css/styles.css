@@ -6,6 +6,7 @@ body {
     font-family: 'Oswald', sans-serif;
     align-items: center;
     text-align: center;
+    margin: 0;
 }
 
 .profile-picture {
@@ -66,11 +67,35 @@ body {
     background-color: #7D8F69;
 }
 
+.page-header {
+    background-color: #D3D3D3;
+    color: #9a3400;
+    font-size: 20px;
+    font-weight: 700;
+    background: #73A9AD;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    
+    
+}
 
+.header-text {
+    margin: 2px;
+    
+}
+.text-container{
+   align-self: center;
+}
+.button-container{
+   align-self: right;
+   justify-self: right;
+   align-content: right;
+
+}
 .btn-login {
-    position: absolute;
-    top: 2%;
-    right: 20%;
+    
     font-family: "Roboto" sans-serif;
     font-size: 10px;
     font-weight: bold;
@@ -91,9 +116,7 @@ body {
 }
 
 .btn-regy{
-    position: absolute;
-    top: 2%;
-    right: 8%;
+  
     font-family: "Roboto" sans-serif;
     font-size: 10px;
     font-weight: bold;
@@ -273,19 +296,11 @@ figcaption {
     transform: scale(1.1);
 }
 
-.page-header {
-    background-color: #D3D3D3;
-    color: #9a3400;
-    font-size: 20px;
-    font-weight: 700;
-    background: #73A9AD;
-    border-radius: 10px;
-    padding: 0;
-}
+
 
 .btn-goback {
     position: absolute;
-    top: 2%;
+    bottom: 2%;
     right: 87%;
     font-family: "Roboto" sans-serif;
     font-size: 10px;
@@ -393,6 +408,10 @@ a {
     text-decoration: none;
 }
 
+
+a:visited{
+    color:inherit;
+
 input[type="file"]::file-selector-button {
     font-family: "Roboto" sans-serif;
     font-size: 10px;
@@ -411,6 +430,7 @@ input[type="file"]::file-selector-button {
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow, transform;
     transition-property: box-shadow, transform;
+
 }
 
 .lr-page {
@@ -447,21 +467,94 @@ input[type="file"]::file-selector-button {
 
 .goal-name-box{
     border-radius: 5px;
-    border:none;
+    border: solid;
+    border-width: 1px;
 }
 
 .goal-detail-box{
     padding-bottom:100px;
     border-radius: 5px;
-    border: none;
+    border: solid;
+    border-width: 1px;
     word-wrap: break-word;
     word-break: break-all;
 }
 
-
-
-@media (max-width:749px){
-
-
-
+.goal-container{
+    background-color: #73A9AD;
+    width: 30%;
+    margin: auto;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    border-radius: 20px;
 }
+
+.goal-header {
+    background-color: #9a3400;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 25px;
+    color: #f8f5f0;
+    
+}
+
+.add-goal-footer{
+    background: #9a3400;
+    color: white;
+    width: 30%;
+    margin:auto;
+    border-radius: 15px;
+    padding:1%
+    
+}
+/* @media (max-width:749px){
+
+    .btn-login {
+        position: absolute;
+        top: 2%;
+        right: 20%;
+        font-family: "Roboto" sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+        background: #9a3400;
+        width: 100px;
+        padding: 7px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        -webkit-transform-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow, transform;
+        transition-property: box-shadow, transform;
+    }
+    
+    .btn-regy{
+        position: absolute;
+        top: 2%;
+        right: 8%;
+        font-family: "Roboto" sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+        background: #9a3400;
+        width: 100px;
+        padding: 7px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        -webkit-transform-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow, transform;
+        transition-property: box-shadow, transform;
+    }
+    
+
+} */

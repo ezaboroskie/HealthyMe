@@ -8,15 +8,15 @@
       <h1>Mental Wellbeing Goals and Comments</h1>
     </div>
     <div>
-      <ul>
         {{#mentalGoals}}
         <form method="POST" action="/delete-mhealth">
-        <h2>{{goal}}</h2>
-        <h3>{{description}}</h3>
+        <div class='goal-container'>
+        <p class = 'goal-header'>{{goal}}</p>
+        <p class = 'goal-description-text'>{{description}}</p>
+        </div>
         <button class="btn-remove">Delete Goal</button>
         <input type="hidden" name="goalId" value={{id}} />
         </form>
-
         {{#notes}}
         {{body}}
         <form method="POST" action="/delete-note-mental">
@@ -31,24 +31,19 @@
         </form>
 
         {{/mentalGoals}}
-      </ul>
+    
     </div>
-    <div class="home-links">
 
-      <a href="/add-mhealth">
-          <div class="l-links">
-              <p>Add Mental Health Goal</p>
-          </div>
-      </a>
-      <a href="/user">
-          <div class="m-links">
-              <p>User Profile</p>
-          </div>
-      </a>
-      <a href="/logout">
-          <div class="l-logout">
-              <p>Logout</p>
-          </div>
-      </a>
+    <div id="mhealth-links">
+      <a href="/add-mhealth"><h2 class = 'add-goal-footer'>Add a Mental Health Goal</h2></a>
+      <a href="/user"><h3>User Profile</h3></a>
+      <a href= "/logout"><p>Logout</p></a>
+    </div>
+    <a href="/user">
+      <div>
+        <button class="btn-goback">Go Back</button>
+      </div>
+    </a>
+
   </body>
 </html>
