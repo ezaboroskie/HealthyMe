@@ -17,7 +17,7 @@
 * JavaScript, Node.js, Express.js, PostgreSQL, CSS, 
 
 ## Team Members
-* @ElyasO03
-* @NovaMerida
-* @MattHerringshaw1
-* @ezaboroskie
+* {@ElyasO03](https://github.com/ElyasO03)
+* [@NovaMerida](https://github.com/NovaMerida)
+* [@MattHerringshaw1](https://github.com/MattHerringshaw1)
+* {@ezaboroskie](https://github.com/ezaboroskie)
