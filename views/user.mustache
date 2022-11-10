@@ -6,10 +6,10 @@
 
 
 <body>
-<div>
-    <h1> Main User Interface To See Big Picture </h1>
-    <h3>Welcome, {{firstname}} {{lastname}}</h3>
-</div>
+    <div class="page-header">
+        <h1> Main User Interface To See Big Picture </h1>
+        <h3>Welcome, {{firstname}} {{lastname}}</h3>
+    </div>
 <div>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <label>Profile Picture</label>
@@ -19,13 +19,30 @@
 </div>
 
 <img src ="{{imageURL}}" class = "{{className}}" />
-<a class="user-page-links">
-    <a id="poop" href="/user-goals"><h2>Long Term Goals</h2></a>
-    <a href="/mhealth"><h2>Mental Health Goals</h2></a> 
-    <a class="user-health-links" href="/phealth"><h2>Physical Goals</h2></a>
 </div>
-<div>
-    <a class="user-health-logout" href= "/logout"><p>Logout</p></a>
+<div class="home-links">
+
+    <a href="/user-goals">
+        <div class="l-links">
+            <p>Long Term Goals</p>
+        </div>
+    </a>
+    <a href="/mhealth">
+        <div class="m-links">
+            <p>Mental Health Goals</p>
+        </div>
+    </a>
+    <a href="/phealth">
+        <div class="p-links">
+            <p>Physical Goals</p>
+        </div>
+    </a>
+    <a href="/logout">
+        <div class="l-logout">
+            <p>Logout</p>
+        </div>
+    </a>
+
 </div>
 
 

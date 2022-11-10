@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@300&family=Roboto+Mono:wght@500&family=Russo+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&family=Oswald:wght@500;600&family=Poppins:wght@300&display=swap');
 
 body {
-    background: linear-gradient(120deg, #73A9AD, #7D8F69);
+    background: #f8f5f0;
     color: black;
     font-family: 'Oswald', sans-serif;
     align-items: center;
@@ -10,9 +9,13 @@ body {
 }
 
 .profile-picture {
-    height: 150px;
-    width: auto;
-    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    margin: 0px;
+    border-radius: 50%;
+    position: absolute;
+    top: 3.7%;
+    right: 5%;
 }
 
 .login-create {
@@ -20,11 +23,11 @@ body {
 }
 
 #login-button {
-    border: none;
+    border: 1px solid black;
     outline: none;
     margin: 5px;
     padding: 1rem 1.5rem;
-    background: rgba(255, 255, 255, .3);
+    background: #73A9AD;
     border-radius: 100px;
     width: 25%;
 }
@@ -64,11 +67,50 @@ body {
 }
 
 
-#index-links {
+.btn-login {
     position: absolute;
-    top: 0%;
-    right: 5%;
-    color: black;
+    top: 2%;
+    right: 20%;
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #9a3400;
+    width: 100px;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.btn-regy{
+    position: absolute;
+    top: 2%;
+    right: 8%;
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #9a3400;
+    width: 100px;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
 }
 
 #login-button {
@@ -83,11 +125,11 @@ body {
 }
 
 #regi-button {
-    border: none;
+    border: 1px solid black;
     outline: none;
     margin: 5px;
     padding: 1rem 1.5rem;
-    background: rgba(255, 255, 255, .3);
+    background: #73A9AD;
     border-radius: 100px;
     width: 25%;
     
@@ -106,7 +148,7 @@ body {
 
 #regy-body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(120deg, #73A9AD, #7D8F69);
+    background: #f8f5f0;
     height: 100vh;
     overflow: hidden;
     border: none;
@@ -119,7 +161,6 @@ body {
     border: none;
     outline: none;
     margin: 5px;
-    background: rgba(255, 255, 255, .3);
     padding: 1rem 1.5rem;
     border-radius: 100px;
     width: 50%;
@@ -175,7 +216,6 @@ figcaption {
     align-items: center;
     text-align: center;
     display: block;
-    justify-content: left;
 }
 
 .btn {
@@ -224,11 +264,137 @@ figcaption {
     transform: scale(1.1);
 }
 
+.btn-login:hover, .btn-login:focus, .btn-login:active,
+.btn-regy:hover, .btn-regy:focus, .btn-regy:active 
+.btn-view:hover, .btn-view:focus, .btn-view:active
+.btn-goback:hover, .btn-goback:focus, .btn-goback:active{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 .page-header {
     background-color: #D3D3D3;
-    color: #9F8772;
-    outline: auto;
-    outline-color: #7D8F69;
+    color: #9a3400;
+    font-size: 20px;
+    font-weight: 700;
+    background: #73A9AD;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.btn-goback {
+    position: absolute;
+    top: 2%;
+    right: 87%;
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #9a3400;
+    width: 10%;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.btn-view {
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #7D8F69;
+    width: 170px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.p-links, .m-links, .l-links {
+    font-family: "Roboto" sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 7px;
+    background: #73A9AD;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.m-links:hover, .m-links:focus, .m-links:active,
+.p-links:hover, .p-links:focus, .p-links:active,
+.l-links:hover, .l-links:focus, .l-links:active,
+.l-logout:hover, .l-logout:focus, .l-logout:active{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.home-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-decoration: none;
+    margin: auto;
+}
+
+.l-logout {
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid black;
+    background: #9a3400;
+    margin: auto;
+    margin-top: 7px;
+    width: 10%;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+a {
+    text-decoration: none;
+}
+
+.lr-page {
+    font-family: 'Merriweather', serif;
 }
 
 .index-image-container{
