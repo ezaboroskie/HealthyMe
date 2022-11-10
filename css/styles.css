@@ -155,14 +155,7 @@ figcaption {
   }
 
 
-.coverimg {
-    height: 85%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 85%;
-    margin-bottom: 2%;
-    }
+
 
 .indextitle {
     display: flex;
@@ -236,4 +229,53 @@ figcaption {
     color: #9F8772;
     outline: auto;
     outline-color: #7D8F69;
+}
+
+.index-image-container{
+    display:flex;
+    width: 100%;
+    height:100%;
+    padding: 20%;
+}
+
+.coverimg {
+    height: 85%;
+    width: auto;
+    border-radius: 5px;
+    }
+
+.add-user-form {
+    display: flex;
+    flex-direction: column;
+
+}   
+
+.goal-name{
+    margin: 1%;
+}
+
+.goal-detail{
+    margin: 1%;
+
+}
+
+.goal-name-box{
+    border-radius: 5px;
+    border:none;
+}
+
+.goal-detail-box{
+    padding-bottom:100px;
+    border-radius: 5px;
+    border: none;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
+
+@media (max-width:749px){
+
+
+
 }
