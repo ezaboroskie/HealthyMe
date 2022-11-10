@@ -2,11 +2,9 @@
   <head>
     <link rel="stylesheet" href="/css/styles.css">
   </head>
+  
   <body>
-<h1> Physical Wellbeing Goals and Comments</h1>
-
-
-<a href="/add-physical-goal"><h2>Add a Physical Wellbeing Goal</h2></a>
+    <h1> Physical Wellbeing Goals and Comments</h1>
     <div>
       <ul>
       {{#physicalGoals}}
@@ -16,6 +14,20 @@
       <button class="btn">Delete Goal</button>
       <input type="hidden" name="physicalId" value={{id}} />
       </form>
+
+      {{#notes}}
+      {{body}}
+      <form method="POST" action="/delete-note-physical">
+          <input type="hidden" value={{id}} name="id" />
+          <button>Remove Note</button>
+      </form>
+      {{/notes}}
+      <form method="POST" action="/add-note-physical">
+          <input required type="text" placeholder="Add note here" name="note" />
+          <input type="hidden" name="id" value={{id}} />
+          <button>Add Note</button>
+      </form>
+
       {{/physicalGoals}}
       </ul>
     </div>
