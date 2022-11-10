@@ -411,6 +411,7 @@ a {
 
 a:visited{
     color:inherit;
+}
 
 input[type="file"]::file-selector-button {
     font-family: "Roboto" sans-serif;
