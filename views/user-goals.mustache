@@ -4,14 +4,15 @@
   </head>
   <body>
     <div class="page-header">
-      <h1> Overall Health and Wellness Goals Here </h1>
+      <h1> Long Term Goals </h1>
     </div>
     <div>
-      <ul>
         {{#userGoals}}
         <form method="POST" action="/delete-user-goal">
-        <h2>{{goal}}</h2>
-        <h3>{{description}}</h3>
+        <div class='goal-container'>
+        <p class='goal-header'>{{goal}}</p>
+        <p class='goal-description-text'>{{description}}</p>
+        </div>
         <button class="btn-remove">Delete Goal</button>
         <input type="hidden" name="goalId" value={{id}} />
         </form>
@@ -28,10 +29,10 @@
             <button class="btn">Add Note</button>
         </form>
         {{/userGoals}}
-      </ul>
+      
     </div>
     <div id="user-goal-links">
-      <a href="/add-user-goal"><h2>Add a Long Term Goal</h2></a>
+      <a href="/add-user-goal"><h2 class='add-goal-footer'>Add a Long Term Goal</h2></a>
       <a href="/user"><h3>User Profile</h3></a>
       <a href= "/logout"><p>Logout</p></a>
     </div>
