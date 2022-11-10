@@ -1,23 +1,21 @@
 # Total Health and Wellness App
 
-* Purpose of the App: The purpose of the app is to track your Physical Health, Mental Health, and Long Term Goals. The user can add whatever Goals they want and have a chat where they can talk to other users and see how they are doing and have people to talk to in the same category.
+* Purpose of the App: The purpose of the app is to track your Physical Health, Mental Health, and Long Term Goals. By creating lists that a user can reference at any time, one will be able to become more accountable when setting out to complete a task, no matter how big or small.
 
-* Features on the App: Some of the Features on the app is where you can talk in a general chat with all users. You can app Goals to your choice on any of the Health Goals or Long Term. 
+
+* Features on the App: After creating a unique user profile, one will have the option to record their goals based on 3 different categories.  Once creating a specific goal the user can then add notes to that goal to help track progress and store their thoughts.  Goals as well as notes can be added or deleted at any point dependent on the users intended purpose of the app.
 
 ## Preview Example
 
-## Guest Login
-* username: test3
-* password: test3
 
 ## Link to Website
-
+* [Healthy Me!]()
 
 ## Programming Languages
-* JavaScript, Node.js, Express.js, PostgreSQL, CSS, 
+* CSS, Mustache, JavaScript, Node.js, Express.js, Sequelize
 
 ## Team Members
-* @ElyasO03
-* @NovaMerida
-* @MattHerringshaw1
-* @ezaboroskie
+* [@ElyasO03](https://github.com/ElyasO03)
+* [@NovaMerida](https://github.com/NovaMerida)
+* [@MattHerringshaw1](https://github.com/MattHerringshaw1)
+* [@ezaboroskie](https://github.com/ezaboroskie)
