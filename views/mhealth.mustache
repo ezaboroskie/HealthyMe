@@ -4,14 +4,16 @@
   </head>
 
   <body>
-    <h1> Mental Wellbeing Goals and Comments </h1>
+    <div class="page-header">
+      <h1>Mental Wellbeing Goals and Comments</h1>
+    </div>
     <div>
       <ul>
         {{#mentalGoals}}
         <form method="POST" action="/delete-mhealth">
         <h2>{{goal}}</h2>
         <h3>{{description}}</h3>
-        <button class="btn">Delete Goal</button>
+        <button class="btn-remove">Delete Goal</button>
         <input type="hidden" name="goalId" value={{id}} />
         </form>
 
@@ -19,13 +21,13 @@
         {{body}}
         <form method="POST" action="/delete-note-mental">
             <input type="hidden" value={{id}} name="id" />
-            <button>Remove Note</button>
+            <button class="btn-remove">Remove Note</button>
         </form>
         {{/notes}}
         <form method="POST" action="/add-note-mental">
             <input required type="text" placeholder="Add note here" name="note" />
             <input type="hidden" name="id" value={{id}} />
-            <button>Add Note</button>
+            <button class="btn">Add Note</button>
         </form>
 
         {{/mentalGoals}}
@@ -36,5 +38,10 @@
       <a href="/user"><h3>User Profile</h3></a>
       <a href= "/logout"><p>Logout</p></a>
     </div>
+    <a href="/user">
+      <div>
+        <button class="btn-goback">Go Back</button>
+      </div>
+    </a>
   </body>
 </html>
