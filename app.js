@@ -50,7 +50,9 @@ app.get('/user', authentification, async (req,res)=>{
         where: {id: userId}
     })
     
-    
+    const profilePic = await models.User.findOne({
+        where: {id: userId}
+    })
     
     res.render('user', {imageURL: user.profilepic, className: 'profile-picture', firstname: user.firstName, lastname: user.lastName })
    
