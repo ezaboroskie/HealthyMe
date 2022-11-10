@@ -61,8 +61,14 @@ app.get('/phealth', authentification, async (req,res)=>{
     const physicalGoals = await models.phealth.findAll({
         where: {phealthsid: userId}
     })
+
+    const physicalNotes = await models.phealthnote.findAll({})
+    for (let goal of physicalGoals) {
+        let filteredGoals = physicalNotes.filter(note => goal.id == note.phealthnotesid)
+        goal.notes = filteredGoals
+    }
+    // console.log(physicalGoals[0].notes[0].dataValues)
     res.render('phealth', {physicalGoals: physicalGoals})
-   
 })
 
 app.get('/mhealth',authentification,async(req,res)=>{
@@ -70,17 +76,29 @@ app.get('/mhealth',authentification,async(req,res)=>{
     const mentalGoals = await models.mhealth.findAll({
         where: {mhealthsid: userId}
     }) 
+
+    const mentalNotes = await models.mhealthnote.findAll({})
+    for (let goal of mentalGoals) {
+        let filteredGoals = mentalNotes.filter(note => goal.id == note.mhealthnotesid)
+        goal.notes = filteredGoals
+    }
+    // console.log(mentalGoals[0].notes[0].dataValues)
+
     res.render('mhealth', {mentalGoals: mentalGoals})
-    
 })
 
-app.get('/user-goals',authentification, async (req,res)=>{
+app.get('/user-goals', authentification, async (req,res)=>{
     const userId = req.session.userId
     const userGoals = await models.usergoal.findAll({
         where: {usergoalid: userId}
     }) 
+    const longNotes = await models.usergoalsnote.findAll({})
+    for (let goal of userGoals) {
+        let filteredGoals = longNotes.filter(note => goal.id == note.usergoalsnotesid)
+        goal.notes = filteredGoals
+    }
+    // console.log(userGoals[0].notes[0].dataValues)
     res.render('user-goals', {userGoals: userGoals})
-    
 })
 
 app.get('/add-physical-goal',authentification, (req,res)=>{
@@ -197,24 +215,34 @@ app.post('/add-physical-goal', async (req,res)=>{
    
 })
 
-app.post('/delete-user-goal', async (req,res) =>{
+app.post('/delete-user-goal', authentification, async (req,res) =>{
     const {goalId} = req.body
+    await models.usergoalsnote.destroy({
+        where:{
+            usergoalsnotesid:parseInt(goalId)
+        }
+    })
     const deletedGoal = await models.usergoal.destroy({
         where:{
             id:parseInt(goalId)
         }
     })
-    res.render('user-goals')
+    res.redirect('/user-goals')
 })
 
-app.post('/delete-physical-goal', async (req,res)=>{
+app.post('/delete-physical-goal', authentification, async (req,res)=>{
     const {physicalId} = req.body
+    await models.phealthnote.destroy({
+        where:{
+            phealthnotesid:parseInt(physicalId)
+        }
+    })
     const deletedPGoal = await models.phealth.destroy({
         where:{
             id:parseInt(physicalId)
         }
     })
-    res.render('phealth')
+    res.redirect('/phealth')
 })
 
 app.post('/add-mhealth', async (req,res)=>{
@@ -235,12 +263,17 @@ app.post('/add-mhealth', async (req,res)=>{
 
 app.post('/delete-mhealth', async (req,res) =>{
     const {goalId} = req.body
+    await models.mhealthnote.destroy({
+        where:{
+            mhealthnotesid:parseInt(goalId)
+        }
+    })
     const deletedGoal = await models.mhealth.destroy({
         where:{
             id:parseInt(goalId)
         }
     })
-    res.render('mhealth')
+    res.redirect('/mhealth')
 })
 
 function uploadFile (req,callback){
@@ -269,6 +302,78 @@ function uploadFile (req,callback){
     })
 }
 
+
+// adding note long
+app.post("/add-note-long", authentification, async (req, res) => {
+    const {note, id} = req.body
+    // console.log(req.body)
+    await models.usergoalsnote.create({
+        body: note, 
+        usergoalsnotesid: id
+    })
+    res.redirect('/user-goals')
+})
+
+// adding note physical
+app.post("/add-note-physical", authentification, async (req, res) => {
+    const {note, id} = req.body
+    // console.log(req.body)
+    let goal = await models.phealthnote.create({
+        body: note, 
+        phealthnotesid: id
+    })
+    console.log(goal)
+    res.redirect('/phealth')
+})
+
+// adding note mental
+app.post("/add-note-mental", authentification, async (req, res) => {
+    const {note, id} = req.body
+    console.log(req.body)
+    let goal = await models.mhealthnote.create({
+        body: note, 
+        mhealthnotesid: id
+    })
+    console.log(goal)
+    res.redirect('/mhealth')
+})
+
+
+// removing note long
+app.post("/delete-note-long", authentification, async (req, res) => {
+    const {id} = req.body
+    // console.log(id)
+    await models.usergoalsnote.destroy({
+        where:{
+            id:parseInt(id)
+        }
+    })
+    res.redirect("/user-goals")
+})
+
+// removing note physical
+app.post("/delete-note-physical", authentification, async (req, res) => {
+    const {id} = req.body
+    // console.log(id)
+    await models.phealthnote.destroy({
+        where:{
+            id:parseInt(id)
+        }
+    })
+    res.redirect("/phealth")
+})
+
+// removing note mental
+app.post("/delete-note-mental", authentification, async (req, res) => {
+    const {id} = req.body
+    // console.log(id)
+    await models.mhealthnote.destroy({
+        where:{
+            id:parseInt(id)
+        }
+    })
+    res.redirect("/mhealth")
+})
 
 
 
