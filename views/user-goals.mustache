@@ -12,20 +12,20 @@
         <form method="POST" action="/delete-user-goal">
         <h2>{{goal}}</h2>
         <h3>{{description}}</h3>
-        <button class="btn">Delete Goal</button>
+        <button class="btn-remove">Delete Goal</button>
         <input type="hidden" name="goalId" value={{id}} />
         </form>
         {{#notes}}
         {{body}}
         <form method="POST" action="/delete-note-long">
             <input type="hidden" value={{id}} name="id" />
-            <button>Remove Note</button>
+            <button class="btn-remove">Remove Note</button>
         </form>
         {{/notes}}
         <form method="POST" action="/add-note-long">
             <input required type="text" placeholder="Add note here" name="note" />
             <input type="hidden" name="id" value={{id}} />
-            <button>Add Note</button>
+            <button class="btn">Add Note</button>
         </form>
         {{/userGoals}}
       </ul>

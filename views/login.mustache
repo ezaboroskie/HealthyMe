@@ -11,16 +11,21 @@
     <div>
         <h1> Login </h1>
         <form method="POST" action="/login">
-            <input class="regy-card-f" type="text" placeholder="Enter username" name="username" />
+            <input required minlength="1" class="regy-card-f" type="text" placeholder="Enter username" name="username" />
             <br>
-            <input class="regy-card-f" type="password" placeholder="Enter password" name="password" />
+            <input required minlength="6" maxlength="12" class="regy-card-f" type="password" placeholder="Enter password" name="password" />
             <br>
             <button id="login-button">Login</button>
         </form>
         {{errorMessage}}
     </div>
-
      
+    <form method="POST" action="/login-guest">
+        <input type="hidden" value="guest" name="usernameGuest">
+        <input type="hidden" value="123456" name="passwordGuest">
+        <button id="login-button-guest">Guest Login</button>
+    </form>
+ 
         <a class="links" href="/register">Don't Have an account? Click Here!</a>
     
 </body>

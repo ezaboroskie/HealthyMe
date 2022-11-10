@@ -29,6 +29,16 @@ body {
     width: 25%;
 }
 
+#login-button-guest {
+    border: none;
+    outline: none;
+    margin: 5px;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, .3);
+    border-radius: 100px;
+    width: 25%;
+}
+
 #top {
     text-align: center;
 }
@@ -180,6 +190,26 @@ figcaption {
     font-size: 10px;
     font-weight: bold;
     background: #73A9AD;
+    width: 100px;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transform-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.btn-remove {
+    font-family: "Roboto" sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    background: #9a3400;
     width: 100px;
     padding: 7px;
     text-align: center;

@@ -146,7 +146,7 @@ app.post ("/register", async (req, res) => {
     let hashedPassword = await bcrypt.hash(password, salt)
     let user = await models.User.findOne({where: {username:username}})
     if(user) {
-    res.render("register", { errorMessage: 'Username is already taken'})
+    res.render("register", { errorMessage: 'Invalid username or password. Please enter correct credentials.'})
     } else {
     const newUser = models.User.build({
         username: username,
@@ -171,10 +171,30 @@ app.post("/login", async (req, res) => {
             }
             res.redirect("/user")
         } else {
-            res.render("login", { errorMessage: "Invalid username"})
+            res.render("login", { errorMessage: "Invalid username or password. Please enter correct credentials."})
         }
     } else {
-        res.render("login", { errorMessage: "Enter correct username or password."})
+        res.render("login", { errorMessage: "Invalid username or password. Please enter correct credentials."})
+    }
+})
+
+// guest login
+app.post("/login-guest", async (req, res) => {
+    const {usernameGuest, passwordGuest} = req.body
+    let userGuest = await models.User.findOne({where: {username:usernameGuest}})
+    if(userGuest) {
+        const result = await bcrypt.compare(passwordGuest, userGuest.password)
+        if(result) {
+            if(req.session) {
+                req.session.username = userGuest.username 
+                req.session.userId = userGuest.id
+            }
+            res.redirect("/user")
+        } else {
+            res.render("login", { errorMessage: "Invalid username or password. Please enter correct credentials."})
+        }
+    } else {
+        res.render("login", { errorMessage: "Invalid username or password. Please enter correct credentials."})
     }
 })
 
