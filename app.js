@@ -12,6 +12,8 @@ const {v4: uuidv4} = require('uuid')
 let uniqueFilename = ''
 require('dotenv').config()
 
+const PORT = process.env.PORT || 8080
+
 app.use('/uploads', express.static ('uploads'))
 app.use('/css', express.static ('css'))
 
@@ -399,7 +401,7 @@ app.post("/delete-note-mental", authentification, async (req, res) => {
 
 
 
-app.listen(8080,() => {
+app.listen(PORT,() => {
     console.log('Server is running healthy!')
 })
 
