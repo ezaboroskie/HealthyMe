@@ -9,6 +9,16 @@ body {
     margin: 0;
 }
 
+.footer {
+    background-color: #73A9AD;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    padding-bottom: 2.5rem;
+}
+
 .profile-picture {
     height: 150px;
     width: 150px;
@@ -339,7 +349,7 @@ figcaption {
 
 .btn-goback {
     position: absolute;
-    bottom: 2%;
+    bottom: 6%;
     right: 87%;
     font-family: "Roboto" sans-serif;
     font-size: 10px;
@@ -362,7 +372,7 @@ figcaption {
 
 .btn-logout {
     position: absolute;
-    bottom: 2%;
+    bottom: 6%;
     left: 87%;
     font-family: "Roboto" sans-serif;
     font-size: 10px;
