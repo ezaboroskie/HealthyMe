@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/css/styles.css">
     <title>Registration</title>
 </head>
-<body id="regy-body">
+<body>
     <div class="lr-page">
-        <h1> Registration Page </h1>
+        <h1 class='reg-header'> Create an Account With Us </h1>
     </div>
     <form class="regy-card" method="POST" action="/register">
         <label class="regy-l"></label>
@@ -27,17 +27,18 @@
         <button id="regi-button">Register</button>
     </form>
     {{errorMessage}}
-    <div id="reg-login-link">
-        <p>Already have an account? 
-            <a id="ahc-link" href="/login">Click Here</a>
-        </p>
-    </div>
+   
+        
+    <a class="links" href="/login">Already have an account? Click Here!</a>
+        
+    
+
+<div class="footer2">
+    <p> &copy; 2022 HealthyMe. All rights reserved</p>
+</div>
+
 
 </body>
 
-<div>
-    <footer class="footer">
-      <p> &copy; 2022 HealthyMe. All rights reserved</p>
-    </footer>
-  </div>
+
 </html>
