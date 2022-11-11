@@ -6,7 +6,7 @@
 * Features on the App: After creating a unique user profile, one will have the option to record their goals based on 3 different categories.  Once creating a specific goal the user can then add notes to that goal to help track progress and store their thoughts.  Goals as well as notes can be added or deleted at any point dependent on the users intended purpose of the app.
 
 ## Preview Example
-
+![](uploads/img.png)
 
 ## Link to Website
 * [Healthy Me!]()
