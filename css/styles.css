@@ -66,7 +66,7 @@ body {
 }
 
 .page-header {
-    color: #9a3400;
+    color: hsl(20, 69%, 14%);
     font-size: 20px;
     font-weight: 700;
     background: #73A9AD;
@@ -86,15 +86,7 @@ body {
     margin-top: 5px;
     margin-bottom:5px;
 }
-.text-container{
-   
 
-}
-.button-container{
-
-
-
-}
 
 
 .header-text {
@@ -209,7 +201,7 @@ body {
     font-size: 10px;
     font-weight: bold;
     border: 1px solid black;
-    background: #18cb4e;
+    background: #73A9AD;
     margin: auto;
     margin-top: 7px;
     width: 10%;
