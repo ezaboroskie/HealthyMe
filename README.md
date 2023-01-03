@@ -1,4 +1,4 @@
-# Total Health and Wellness App
+# Healthy Me
 
 * Purpose of the App: The purpose of the app is to track your Physical Health, Mental Health, and Long Term Goals. By creating lists that a user can reference at any time, one will be able to become more accountable when setting out to complete a task, no matter how big or small.
 
